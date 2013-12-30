@@ -1,0 +1,10 @@
+
+# Standard line comment
+
+       # Whitespace before
+
+t4 # should not see this: t4
+
+## hello
+
+# # what up

@@ -1,0 +1,26 @@
+
+# Standard durations
+t1
+t2
+t4
+t8
+t16
+t32
+t64
+tw
+th
+tq
+
+# Dotted durations
+t.1
+t.2
+t.4
+t.8
+t.16
+t.32
+t.64
+t.w
+t.h
+t.q
+
+t4 0.2 t8 0.2 0.2 th 0.2 |

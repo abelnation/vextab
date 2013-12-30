@@ -1,0 +1,35 @@
+
+
+t8   tq
+
+  t.h
+
+    # Test    asdf
+
+t1
+
+# Another test comment 
+
+  t.4
+
+  2.3 3.4 b5 | % | 4.5 h3 t2 :|
+
+  4.3 2.3 || 4.3 |: 3.4 /3 3.4\4 :|  #this is a comment
+
+  
+
+t4 foo -> bananarama
+
+[ t4 t2 ["foo"] ]
+
+section banana=foo      taz=devil  
+
+    abel-> this is a define of abel
+
+t32     t64
+
+['abel']
+
+  t4
+
+    ["abel"]

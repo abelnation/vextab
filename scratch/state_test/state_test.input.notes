@@ -1,0 +1,11 @@
+# Test Various Note constructions
+
+# Simple note/fret
+0.4 0.3 1.4 0.0 3.4
+
+# Multi-digit
+23.4543 293.23
+
+# Fret group on same string
+0-2-4.1
+0-2-3.2

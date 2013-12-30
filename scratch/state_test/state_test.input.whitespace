@@ -1,0 +1,14 @@
+# Empty lines
+0.3
+
+2.3
+
+# Leading whitespace
+      0.3 t4
+
+# Trailing whitespace
+0.3       
+  2.3 4.3   
+
+# Separations between tokens
+0.3       2.3 3.3   
