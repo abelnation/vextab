@@ -8,7 +8,6 @@ Author: Abel Allison
 - Focus on TAB, as opposed to notation
 - Design a syntax that is made for auto-wrapping.  
 - Support all manner of variable whitespace
-- Section options
 
 ### Done
 - Time durations
@@ -34,6 +33,7 @@ Author: Abel Allison
 - chord labels
 - Build AST
 - Integrate with Renderer (VexArtist, etc.)
+- Section options
 
 ### Syntax Examples
 
