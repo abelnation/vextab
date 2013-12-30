@@ -12,11 +12,11 @@ t1
 
   t.4
 
-  2.3 3.4 b5 | % | 4.5 h3 t2 :|
+  2.3 3.4 b5.4 | % | 4.5 h3.5 t2 :|
 
-  4.3 2.3 || 4.3 |: 3.4 /3 3.4\4 :|  #this is a comment
+  4.3 2.3 || 4.3 |: 2/3/5.4 :|  #this is a comment
 
-  
+
 
 t4 foo -> bananarama
 

@@ -9,3 +9,27 @@
 # Fret group on same string
 0-2-4.1
 0-2-3.2
+
+# Mutes work like fret numbers
+x.1 
+0-x-2.4
+
+# Hammer-ons, bends, pull-offs, slides
+0.4 h2.4 p0.4 
+2.4 /5.4 \2.4
+2.4 b3.4 
+# Also works as a fret-group
+0h2p0.4
+2/5\2.4
+2b3.4
+# Can enter with a hammer/slide, etc.
+h2.4
+/5.4
+
+# Finger annotations
+0f4.2
+0fT.3
+0-1-3.5
+0-1f1-3f2.5
+
+# 0h3f2h5f4

@@ -34,16 +34,6 @@ statement
     { $$ = "REPEAT"; }
   | DURATION
     { $$ = "d" + $1; }
-  | BEND
-    { $$ = "bend: " + $1; }
-  | HAMMERON
-    { $$ = "hammer: " + $1; }
-  | PULLOFF
-    { $$ = "pulloff: " + $1; }
-  | SLIDE_UP
-    { $$ = "slideup: " + $1; }
-  | SLIDE_DOWN
-    { $$ = "slidedown: " + $1; }
   | note_token
     { $$ = $1; }
   | SECTION options
@@ -56,11 +46,11 @@ statement
   ;
 
 note_token
-  : fret_marker
-    {}
+  : string_fret_marker
+    { $$ = $1; }
   ;
 
-fret_marker
+string_fret_marker
   : fret_group "." INTEGER
     { 
       $$ = [];
@@ -69,22 +59,49 @@ fret_marker
       }
       $$ = $$.join("\n");
     }
+  | fret_group "." INTEGER finger_annotation
+    { 
+      $$ = [];
+      for (var i=0; i<$1.length; i++) { 
+        $$.push("st: " + $3 + " fr: " + $1[i] + "fi: " + $4);
+      }
+      $$ = $$.join("\n");
+    }
   ;
 
 fret_group
-  : fret_group "-" INTEGER
+  : fret_group "-" fret_note 
     { $$ = $1; $$.push($3); }
-  | INTEGER
+  | fret_group articulated_fret_note
+    { $$ = $1; $$.push($2); }
+  | fret_note
+    { $$ = [$1]; }
+  | articulated_fret_note
     { $$ = [$1]; }
   ;
 
-finger_annotation
-  : "f" INTEGER
-    { $$ = "fi: " + $2; }
-  | "f" MUTE
-    { $$ = "fi: x"; }
-  | "f" THUMB
-    { $$ = "fi: T"; }
+fret_note
+  : INTEGER
+    { $$ = $1; }
+  | MUTE
+    { $$ = "x"; }
+  | INTEGER FINGER
+    { $$ = $1 + "f" + $2; }
+  | MUTE FINGER
+    { $$ = "x" + "f" + $2; }
+  ;
+
+articulated_fret_note
+  : BEND
+    { $$ = "b"+$1; }
+  | HAMMERON
+    { $$ = "h"+$1; }
+  | PULLOFF
+    { $$ = "p"+$1; }
+  | SLIDE_UP
+    { $$ = "/"+$1; }
+  | SLIDE_DOWN
+    { $$ = "\\"+$1; }
   ;
 
 bar_token

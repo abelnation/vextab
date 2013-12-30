@@ -25,7 +25,7 @@ HSPC                      [ \t]
 
 DIGIT                     [0-9]
         
-DURATION_LENGTH             [qhw]|"16"|"32"|"64"|[1248]
+DURATION_LENGTH           [qhw]|"16"|"32"|"64"|[1248]
 
 ID                        [a-zA-Z_][a-zA-Z0-9_]*
 
@@ -64,7 +64,6 @@ ID                        [a-zA-Z_][a-zA-Z0-9_]*
                           }
 
 [xX]                      return "MUTE"
-[tT]                      return "THUMB"
 "%"                       return "REPEAT_MEASURE"
 
 "||"                      return "DOUBLE_BAR"
@@ -78,6 +77,14 @@ ID                        [a-zA-Z_][a-zA-Z0-9_]*
 "p"{DIGIT}+               { yytext = yytext.slice(1); return "PULLOFF" }
 "/"{DIGIT}+               { yytext = yytext.slice(1); return "SLIDE_UP" }
 "\\"{DIGIT}+              { yytext = yytext.slice(1); return "SLIDE_DOWN" }
+
+"f"({DIGIT}|[tT])         { 
+                            yytext = yytext.slice(1).toUpperCase();
+                            if( !/[tT]/.test(yytext) ) {
+                              yytext = parseInt(yytext);
+                            } 
+                            return "FINGER"
+                          }
 
 /* using a pre-def */
 ('"'{ID}'"')|("'"{ID}"'") { 
