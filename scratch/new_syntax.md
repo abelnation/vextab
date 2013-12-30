@@ -1,15 +1,44 @@
 # VexTab "Just-tab" Syntax Proposal
 Author: Abel Allison
 
-## Goals
+### Goals
 - Easy to remember.  Use ascii tab conventions where possible
 - Easy to read.  Easy to make changes to.
 - Avoid unnecessary work
 - Focus on TAB, as opposed to notation
 - Design a syntax that is made for auto-wrapping.  
 - Support all manner of variable whitespace
+- Section options
+
+### Done
+- Time durations
+- Sections
+- Notes
+    - Strings
+    - Fret groups
+    - Fingerings
+    - Mutes
+- Bars
+- Hammers/pulls/bends/slides
+- Comments
+- Identify pre-def lines
+- Repeat measure
+
+### ToDo
+- Rests
+- Pre-def substitution and parsing
+- Up/down strokes
+- Group modifiers
+    - multiply
+- Tuples (triplets, etc.)
+- chord labels
+- Build AST
+- Integrate with Renderer (VexArtist, etc.)
+
+### Syntax Examples
 
 ```
+# sections define a break in the staves.  otherwise, wrap naturally
 section type=tab tuning=standard
 t8  0.4 0.5 0.6 0.4 0.5 0.6 0.4 0.6 |
 t8  0.4 0.5 0.6 0.4 t4  0.4 0.6 |
@@ -61,7 +90,7 @@ t8  0-2.3 t4 0-1-3.4
 # pre-def syntax
 c_to_g->    t4 3.1 3.1 0.2 2.2 |
 
-# re-usable sections
+# re-usable code snippets
 # pre-defines are not included until you invoke them
 #   with square brackets
 # should work recursively
