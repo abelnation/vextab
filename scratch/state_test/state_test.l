@@ -27,9 +27,7 @@ NL                        [\n\r]
 HSPC                      [ \t]
 
 DIGIT                     [0-9]
-        
 DURATION_LENGTH           [qhw]|"16"|"32"|"64"|[1248]
-
 ID                        [a-zA-Z_][a-zA-Z0-9_]*
 
 %%

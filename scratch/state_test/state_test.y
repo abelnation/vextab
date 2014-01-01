@@ -10,10 +10,26 @@
 %%
 
 root
-  : statements EOF
-    { $$ = $1.join("\n"); console.log($$); }
+  : sections EOF
+    { $$ = new ast.TabRootElement($1, @1); console.log($$.toString()); }
   | EOF
-    { $$ = ""; }
+    { $$ = new ast.TabRootElement(); }
+  ;
+
+sections
+  : sections section
+    { $$ = $1; $$.push($2); }
+  | section
+    { $$ = [$1]; }
+  ;
+
+section
+  : statements
+    { $$ = new ast.TabSection($1, @1); }
+  | SECTION options NL statements
+    { $$ = new ast.TabSection($4, @1, $2); }
+  | SECTION NL statements
+    { $$ = new ast.TabSection($3, @1); }
   ;
 
 statements
@@ -32,6 +48,11 @@ statements
 statement
   : statement_group
     { $$ = $1; }
+  | DEFINE statements NL
+    { 
+      defines[$1] = new ast.PredefinedElement($1, $2, @1);
+      $$ = defines[$1]
+    }
   | predefine_invoke
     { $$ = $1; }
   | chord
@@ -46,13 +67,6 @@ statement
     { $$ = new ast.DurationElement($1, @1); }
   | note_token
     { $$ = $1; }
-  | SECTION options NL
-    { $$ = new ast.TabSection(@1, $2); }
-  | DEFINE statements NL
-    { 
-      defines[$1] = new ast.PredefinedElement($1, $2, @1);
-      $$ = defines[$1]
-    }
   ;
 
 statement_group
@@ -154,9 +168,7 @@ bar_token
 /* OPTIONS State */
 /* ============= */
 options
-  : 
-    { $$ = {}; }
-  | options OPTION
+  : options OPTION
     %{ 
       $$ = $1
       var tokens = $2.split("=");
@@ -172,7 +184,6 @@ options
 
 %% 
 
-var currentSection = undefined;
 var defines = {};
 
 function fretElemForValues(string, fret_values, loc) {

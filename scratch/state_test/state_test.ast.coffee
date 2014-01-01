@@ -1,8 +1,8 @@
 
 class TabRootElement
-  constructor: () ->
+  constructor: (elements = [], loc = null, options = {}) ->
     @type = "TabRootElement"
-    @elements = []
+    @elements = elements
 
   addElement: (elem) ->
     @elements.push(elem)
@@ -13,11 +13,11 @@ class TabRootElement
     result
 
 class TabSection
-  constructor: (loc, options={}) ->
+  constructor: (elements = [], loc = null, options={}) ->
     @type = "TabSection"
     @loc = loc
     @options = options
-    @elements = []
+    @elements = elements
 
   addElement: (elem) ->
     @elements.push(elem)
@@ -208,6 +208,7 @@ class RepeatMeasureElement extends TabElement
 
 
 module.exports = 
+  TabRootElement: TabRootElement
   TabSection: TabSection
   TabElement: TabElement
   OptionElement: OptionElement

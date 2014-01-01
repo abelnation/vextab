@@ -5,9 +5,18 @@
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
   TabRootElement = (function() {
-    function TabRootElement() {
+    function TabRootElement(elements, loc, options) {
+      if (elements == null) {
+        elements = [];
+      }
+      if (loc == null) {
+        loc = null;
+      }
+      if (options == null) {
+        options = {};
+      }
       this.type = "TabRootElement";
-      this.elements = [];
+      this.elements = elements;
     }
 
     TabRootElement.prototype.addElement = function(elem) {
@@ -30,14 +39,20 @@
   })();
 
   TabSection = (function() {
-    function TabSection(loc, options) {
+    function TabSection(elements, loc, options) {
+      if (elements == null) {
+        elements = [];
+      }
+      if (loc == null) {
+        loc = null;
+      }
       if (options == null) {
         options = {};
       }
       this.type = "TabSection";
       this.loc = loc;
       this.options = options;
-      this.elements = [];
+      this.elements = elements;
     }
 
     TabSection.prototype.addElement = function(elem) {
@@ -449,6 +464,7 @@
   })(TabElement);
 
   module.exports = {
+    TabRootElement: TabRootElement,
     TabSection: TabSection,
     TabElement: TabElement,
     OptionElement: OptionElement,

@@ -11,6 +11,7 @@ Author: Abel Allison
 
 ### ToDo
 - Option parsing shift/reduce conflict
+- Improve section parsing to not require globals
 - Up/down strokes
 - Finger annotations for pulls/bends/hammers
 - Tuples (triplets, etc.)
