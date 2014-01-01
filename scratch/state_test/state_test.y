@@ -10,16 +10,20 @@
 %%
 
 root
-  : sections EOF
+  : statements EOF
+    { 
+      var section = new ast.TabSection($1, @1);
+      $$ = new ast.TabRootElement([section], @1); 
+      console.log($$.toString());
+    }
+  | sections EOF
     { $$ = new ast.TabRootElement($1, @1); console.log($$.toString()); }
   | EOF
     { $$ = new ast.TabRootElement(); }
   ;
 
 sections
-  : statements
-    { $$ = new ast.TabSection($1, @1); }
-  | sections section
+  : sections section
     { $$ = $1; $$.push($2); }
   | section
     { $$ = [$1]; }

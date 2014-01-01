@@ -10,8 +10,6 @@ Author: Abel Allison
 - Support all manner of variable whitespace
 
 ### ToDo
-- Option parsing shift/reduce conflict
-- Improve section parsing to not require globals
 - Up/down strokes
 - Finger annotations for pulls/bends/hammers
 - Tuples (triplets, etc.)
@@ -24,6 +22,8 @@ Author: Abel Allison
 - Section options
 
 ### Done
+- Improve section parsing to not require globals
+- Option parsing shift/reduce conflict
 - Time durations
 - Sections
 - Pre-def substitution and parsing
