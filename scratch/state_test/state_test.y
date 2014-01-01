@@ -17,16 +17,16 @@ root
   ;
 
 sections
-  : sections section
+  : statements
+    { $$ = new ast.TabSection($1, @1); }
+  | sections section
     { $$ = $1; $$.push($2); }
   | section
     { $$ = [$1]; }
   ;
 
 section
-  : statements
-    { $$ = new ast.TabSection($1, @1); }
-  | SECTION options NL statements
+  : SECTION options NL statements
     { $$ = new ast.TabSection($4, @1, $2); }
   | SECTION NL statements
     { $$ = new ast.TabSection($3, @1); }
