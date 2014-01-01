@@ -1,6 +1,9 @@
 
 %x FINISHLINE OPTIONS
 
+// Define state uses all normal rules, but stops at new line
+%s DEFINE
+
 %{
   // Data/Functions made available to lexer actions go here
   var duration_map = {
@@ -31,9 +34,9 @@ ID                        [a-zA-Z_][a-zA-Z0-9_]*
 
 %%
 
-[\s]                      /* ignore whitespace */
+<INITIAL>[\s]             /* ignore whitespace */
+
 "#".*                     /* ignore comments to end of line */
-<<EOF>>                   return "EOF"
 
 /* State-changing identifiers */
 /* ========================== */
@@ -43,7 +46,7 @@ ID                        [a-zA-Z_][a-zA-Z0-9_]*
                             return "SECTION";
                           }
 {ID}{HSPC}*"->"           {
-                            this.begin("FINISHLINE"); 
+                            this.begin("DEFINE"); 
                             yytext = yytext.replace("->", "").trim();
                             return "DEFINE";
                           }
@@ -64,6 +67,7 @@ ID                        [a-zA-Z_][a-zA-Z0-9_]*
                           }
 
 [xX]                      return "MUTE"
+"r"                       return "REST"
 "%"                       return "REPEAT_MEASURE"
 
 "||"                      return "DOUBLE_BAR"
@@ -102,7 +106,11 @@ ID                        [a-zA-Z_][a-zA-Z0-9_]*
 /* After a section token, options are parsed to the end of the line */
 <OPTIONS>[ \t]            /* ignore horizontal whitespace */
 <OPTIONS>{ID}"="\w*       return "OPTION"
-<OPTIONS>{NL}             this.begin("INITIAL")
+<OPTIONS>{NL}             this.begin("INITIAL"); return "NL";
+
+/* When defining a code chunk.  Newlines delimit the end of the definition */
+<DEFINE>{HSPC}            /* ignore horizontal whitespace */
+<DEFINE>({NL}|<<EOF>>)    { this.begin("INITIAL"); return "NL"; }
 
 /* After consuming the rest of a line, return to initial state */      
 <FINISHLINE>.*            {
@@ -119,5 +127,9 @@ ID                        [a-zA-Z_][a-zA-Z0-9_]*
 ":"                       return ":"
 "^"                       return "^"
 "-"                       return "-"
-'"'                       return '"';
+'"'                       return '"'
 "'"                       return "'"
+"*"                       return "*"
+
+
+<<EOF>>                   return "EOF"

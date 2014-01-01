@@ -9,9 +9,23 @@ Author: Abel Allison
 - Design a syntax that is made for auto-wrapping.  
 - Support all manner of variable whitespace
 
+### ToDo
+- Option parsing shift/reduce conflict
+- Up/down strokes
+- Finger annotations for pulls/bends/hammers
+- Tuples (triplets, etc.)
+- chord labels
+- Build AST
+    - Add elements to section node
+    - Modifiers
+        - Up/downstroke
+- Integrate with Renderer (VexArtist, etc.)
+- Section options
+
 ### Done
 - Time durations
 - Sections
+- Pre-def substitution and parsing
 - Notes
     - Strings
     - Fret groups
@@ -22,18 +36,18 @@ Author: Abel Allison
 - Comments
 - Identify pre-def lines
 - Repeat measure
-
-### ToDo
-- Rests
-- Pre-def substitution and parsing
-- Up/down strokes
 - Group modifiers
     - multiply
-- Tuples (triplets, etc.)
-- chord labels
-- Build AST
-- Integrate with Renderer (VexArtist, etc.)
-- Section options
+- Rests
+- AST
+    - Fret notes
+    - Durations
+    - Bars
+    - Section Statements
+    - Groups
+    - Pre-defs
+    - Chords
+    - Rests
 
 ### Syntax Examples
 
@@ -77,7 +91,6 @@ t8  [0.4 0.5 0.6] [0.4 0.5 0.6] [0.4 0.6] |
 t8  [0.4 0.5] [0.6 0.4 0.5 0.6 0.4] [0.6] |
 
 # triplets
-t8  [0.4 0.5 0.6]3 [0.4 0.5 0.6]3 [0.4 0.5 0.6]3 [0.4 0.5 0.6]3 |
 t8  [0.4 0.5 0.6]^3*4 |
 
 # repeat an element

@@ -2,6 +2,9 @@
 
 name=$1
 
+rm $name/$name.ast.js
+coffee -c -o $name/ $name/$name.ast.coffee
+
 rm $name/$name.js
 jison $name/$name.y $name/$name.l -o $name/$name.js
 

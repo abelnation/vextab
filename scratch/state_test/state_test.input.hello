@@ -18,13 +18,13 @@ t1
 
 
 
-t4 foo -> bananarama
+t4 foo -> 0.2
 
 [ t4 t2 ["foo"] ]
 
 section banana=foo      taz=devil  
 
-    abel-> this is a define of abel
+    abel-> 0.2 [ 0.2 0.4 ] | % | ||
 
 t32     t64
 
